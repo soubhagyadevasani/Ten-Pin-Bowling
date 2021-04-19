@@ -13,3 +13,4 @@
 Future Improvements
 - Need to add Comments for the code and add test project 
 - Need to add logic for bowling rules
+- Rename the projectname
