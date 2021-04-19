@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ten Pin Bowling</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Ten Pin Bowling</h1>
+ 
+    <form action="javascript:void(0);" method="POST" onsubmit="addPlayerDetails()" id="form-add-player">
+        <h3>Enter Player Details</h3>
+        <input type="text" id="add-name" placeholder="New Player Name">
+        <input type="submit" value="Add">
+    </form>
+
+    <form style="display:none" id="form-player1" onsubmit="updatePlayerdetails(1)">
+        <h1>Enter Pins hit under each roll and add to ScoreBoard for Player1 </h1>
+        <input type="text" id="add-roll-one-player1" placeholder="pins hit in roll 1">
+        <input type="text" id="add-roll-two-player1" placeholder="pins hit in roll 2">
+        <input type="submit" value="Player 1 Frame">
+    </form>
+
+    <form style="display:none" id="form-player2" onsubmit="updatePlayerdetails(2)">
+        <h1>Enter Pins hit under each roll and add to ScoreBoard for Player2</h1>
+        <input type="text" id="add-roll-one-player2" placeholder="pins hit in roll 1">
+        <input type="text" id="add-roll-two-player2" placeholder="pins hit in roll 2">
+        <input type="submit" value="Player 2 Frame">
+    </form>
+
+    <!--<div id="editForm">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="checkbox" id="edit-isComplete">
+            <input type="text" id="edit-name">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </form>
+    </div>-->
+
+    <p id="counter"></p>
+
+    <table style="display:none" id="tbl-scoreboard">
+        <tr>
+            <td>Player Name</td>
+            <td>Frame1</td>
+            <td>Frame2</td>
+            <td>Frame3</td>
+            <td>Frame4</td>
+            <td>Frame5</td>
+            <td>Frame6</td>
+            <td>Frame7</td>
+            <td>Frame8</td>
+            <td>Frame9</td>
+            <td>Frame10</td>
+            <td>TotalScore</td>
+        </tr>
+        <tr>
+            <td id="td-PlayerName-Player1"></td>
+            <td id="frame-1-Player1"></td>
+            <td id="frame-2-Player1"></td>
+            <td id="frame-3-Player1"></td>
+            <td id="frame-4-Player1"></td>
+            <td id="frame-5-Player1"></td>
+            <td id="frame-6-Player1"></td>
+            <td id="frame-7-Player1"></td>
+            <td id="frame-8-Player1"></td>
+            <td id="frame-9-Player1"></td>
+            <td id="frame-10-Player1"></td>
+            <td id="td-TotalScore-Player1"></td>
+        </tr>
+        <tr>
+            <td id="td-PlayerName-Player2"></td>
+            <td id="frame-1-Player2"></td>
+            <td id="frame-2-Player2"></td>
+            <td id="frame-3-Player2"></td>
+            <td id="frame-4-Player2"></td>
+            <td id="frame-5-Player2"></td>
+            <td id="frame-6-Player2"></td>
+            <td id="frame-7-Player2"></td>
+            <td id="frame-8-Player2"></td>
+            <td id="frame-9-Player2"></td>
+            <td id="frame-10-Player2"></td>
+            <td id="td-TotalScore-Player2"></td>
+        </tr>
+        <tbody id="players"></tbody>
+    </table>
+
+
+
+
+    <script src="js/ScoreBoard.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getPlayerScore();
+    </script>
+</body>
+</html>
