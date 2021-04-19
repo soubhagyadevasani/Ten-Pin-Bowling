@@ -5,6 +5,8 @@
 - textboxes will be displayed with players turn button to add frame and rolls and count of pins.
 - on adding players, post web api is triggered
 - on updating the frame and rolls , put web api is triggered and update the score board
+- Used Asp.net Core web api to develop application
+
 
 
 
