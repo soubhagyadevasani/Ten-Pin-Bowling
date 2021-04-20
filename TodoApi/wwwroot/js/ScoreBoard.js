@@ -117,6 +117,9 @@ function _displayItems(data) {
                 document.getElementById('frame-' + (i + 1) + '-Player' + item.playerId).innerHTML = frameitem.Roll_1 + " " + frameitem.Roll_2;
             });
         }
+        if (frames.length == 10) {
+            document.getElementById('dv-declare-winner').setAttribute("style", "display:block");
+        }
        
         document.getElementById('td-PlayerName-Player' + + item.playerId).innerHTML = item.playerName;
         document.getElementById('td-PlayerName-Player' + item.playerId).setAttribute("data-id", item.playerId);
@@ -125,11 +128,15 @@ function _displayItems(data) {
    
     const player1count = document.getElementById('td-TotalScore-Player1').innerHTML;
     const player2count = document.getElementById('td-TotalScore-Player2').innerHTML;
+    
+   
     if (player1count > player2count) {
         document.getElementById('dv-declare-winner').innerHTML = "Player1 Won the Game!!";
+        
     }
     else {
         document.getElementById('dv-declare-winner').innerHTML = "Player1 Won the Game!!";
+       
     }
     scores = data;
 }
