@@ -1,5 +1,7 @@
 ﻿const uri = 'api/ScoreBoards';
 let scores = [];
+let frames_player1 = [];
+let frames_player2 = [];
 
 
 function getPlayerScore() {
@@ -37,12 +39,19 @@ function addPlayerDetails() {
 
 
 
-function updatePlayerdetails(playerturn) {
+function updatePlayer1details(playerturn) {
+    //var obj = {};
+    //obj["Roll_1"] = document.getElementById('add-roll-one-player' + playerturn).value;
+    //obj["Roll_2"] = document.getElementById('add-roll-two-player' + playerturn).value;
+    //frames_player1.push(obj);
+    //'{ "frames": [{ "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "7", "Roll_2": "0" }] }'
+
     const itemId = document.getElementById('td-PlayerName-Player' + playerturn).getAttribute('data-id');
+    const playername = document.getElementById('td-PlayerName-Player' + playerturn).innerHTML;
     const item = {
         "playerId": parseInt(itemId, 10),
-        "playername": "Player1",
-        "FramesData": '{ "frames": [{ "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "7", "Roll_2": "0" }] }',
+        "playername": playername,
+        "FramesData": '{ "frames": [{ "Roll_1": "10", "Roll_2": "0" }, { "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "7", "Roll_2": "0" }, { "Roll_1": "1", "Roll_2": "4" }, { "Roll_1": "2", "Roll_2": "2" },{ "Roll_1": "10", "Roll_2": "0" }, { "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "7", "Roll_2": "0" }, { "Roll_1": "1", "Roll_2": "4" }, { "Roll_1": "2", "Roll_2": "2" }] }',
         "totalscore": 0
 
     };
@@ -62,6 +71,32 @@ function updatePlayerdetails(playerturn) {
     return false;
 }
 
+function updatePlayer2details(playerturn) {
+    const itemId = document.getElementById('td-PlayerName-Player' + playerturn).getAttribute('data-id');
+    const playername = document.getElementById('td-PlayerName-Player' + playerturn).innerHTML;
+    const item = {
+        "playerId": parseInt(itemId, 10),
+        "playername": playername,
+        "FramesData": '{ "frames": [{ "Roll_1": "3", "Roll_2": "7" }, { "Roll_1": "2", "Roll_2": "1" }, { "Roll_1": "5", "Roll_2": "1" }, { "Roll_1": "3", "Roll_2": "4" }, { "Roll_1": "6", "Roll_2": "1" }, { "Roll_1": "10", "Roll_2": "0" }, { "Roll_1": "4", "Roll_2": "2" }, { "Roll_1": "3", "Roll_2": "1" }, { "Roll_1": "6", "Roll_2": "1" }, { "Roll_1": "5", "Roll_2": "1" }] }',
+        "totalscore": 0
+
+    };
+    fetch(`${uri}/${itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+    })
+        .then(() => getItems())
+        .catch(error => console.error('Unable to update item.', error));
+
+    //  closeInput();
+
+    return false;
+}
+
 function _displayItems(data) {
     if (data.length == 2) {
         document.getElementById('form-add-player').setAttribute("style", "display:none");
@@ -76,15 +111,6 @@ function _displayItems(data) {
     const button = document.createElement('button');
 
     data.forEach(item => {
-
-        //let playerid = document.createElement('div');
-        //playername.innerHTML = item.playerid;
-
-        //let playername = document.createElement('div');
-        //playername.innerHTML = item.playerName;
-        //playername.setAttribute("Id", "edit-player" + item.playerId);
-        //playername.setAttribute("data-id", item.playerId);
-
         let frames = JSON.parse(item.framesData).frames;
         if (frames.length > 0) {
             frames.forEach(function (frameitem, i) {
@@ -95,29 +121,16 @@ function _displayItems(data) {
         document.getElementById('td-PlayerName-Player' + + item.playerId).innerHTML = item.playerName;
         document.getElementById('td-PlayerName-Player' + item.playerId).setAttribute("data-id", item.playerId);
         document.getElementById('td-TotalScore-Player' + item.playerId).innerHTML = item.totalScore;
-        //let totalscore = document.createElement('div');
-        //totalscore.innerHTML = item.totalScore;
-
-        //let tr = tBody.insertRow();
-
-        //let td1 = tr.insertCell(0);
-       
-        //let td2 = tr.insertCell(0);
-       
-
-        ////let td3 = tr.insertCell(0);
-      
-
-        ////let td4 = tr.insertCell(0);
-     
-        //td2.appendChild(playername);
-        //td1.appendChild(frame1);
-        //td3.appendChild(frame1);
-        //td4.appendChild(playername);
-
-       
     });
-
+   
+    const player1count = document.getElementById('td-TotalScore-Player1').innerHTML;
+    const player2count = document.getElementById('td-TotalScore-Player2').innerHTML;
+    if (player1count > player2count) {
+        document.getElementById('dv-declare-winner').innerHTML = "Player1 Won the Game!!";
+    }
+    else {
+        document.getElementById('dv-declare-winner').innerHTML = "Player1 Won the Game!!";
+    }
     scores = data;
 }
 

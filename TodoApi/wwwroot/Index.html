@@ -7,39 +7,30 @@
 </head>
 <body>
     <h1>Ten Pin Bowling</h1>
- 
+
     <form action="javascript:void(0);" method="POST" onsubmit="addPlayerDetails()" id="form-add-player">
         <h3>Enter Player Details</h3>
         <input type="text" id="add-name" placeholder="New Player Name">
         <input type="submit" value="Add">
     </form>
 
-    <form style="display:none" id="form-player1" onsubmit="updatePlayerdetails(1)">
+    <form style="display:none" id="form-player1" onsubmit="updatePlayer1details(1)">
         <h1>Enter Pins hit under each roll and add to ScoreBoard for Player1 </h1>
         <input type="text" id="add-roll-one-player1" placeholder="pins hit in roll 1">
         <input type="text" id="add-roll-two-player1" placeholder="pins hit in roll 2">
         <input type="submit" value="Player 1 Frame">
     </form>
 
-    <form style="display:none" id="form-player2" onsubmit="updatePlayerdetails(2)">
+    <form style="display:none" id="form-player2" onsubmit="updatePlayer2details(2)">
         <h1>Enter Pins hit under each roll and add to ScoreBoard for Player2</h1>
         <input type="text" id="add-roll-one-player2" placeholder="pins hit in roll 1">
         <input type="text" id="add-roll-two-player2" placeholder="pins hit in roll 2">
         <input type="submit" value="Player 2 Frame">
     </form>
 
-    <!--<div id="editForm">
-        <h3>Edit</h3>
-        <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input type="hidden" id="edit-id">
-            <input type="checkbox" id="edit-isComplete">
-            <input type="text" id="edit-name">
-            <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
-        </form>
-    </div>-->
-
     <p id="counter"></p>
+
+
 
     <table style="display:none" id="tbl-scoreboard">
         <tr>
@@ -87,7 +78,8 @@
         <tbody id="players"></tbody>
     </table>
 
-
+    <p id="dv-declare-winner">
+    </p>
 
 
     <script src="js/ScoreBoard.js" asp-append-version="true"></script>

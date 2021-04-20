@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
@@ -56,6 +57,31 @@ namespace TodoApi.Controllers
 
             try
             {
+                BowlingGame game = new BowlingGame();
+                Frames frames = JsonConvert.DeserializeObject<Frames>(scoreBoard.FramesData);
+
+                scoreBoard.TotalScore = 0;
+
+                for(int frameIndex = 0; frameIndex < frames.frames.Count; frameIndex++)
+                {
+                    Frame eachframe = new Frame();
+                    eachframe.Roll_1 = frames.frames[frameIndex].Roll_1;
+                    eachframe.Roll_2 = frames.frames[frameIndex].Roll_2;
+                    if (game.isStrike(eachframe.Roll_1, eachframe.Roll_2))
+                    {
+                        scoreBoard.TotalScore += 10 + frames.frames[frameIndex + 1].Roll_1 + frames.frames[frameIndex + 1].Roll_2;
+                    }
+                    else if (game.isSpare(eachframe.Roll_1, eachframe.Roll_2))
+                    {
+                        scoreBoard.TotalScore += 10 + frames.frames[frameIndex + 1].Roll_1;
+                    }
+                    else
+                    {
+                        scoreBoard.TotalScore +=  frames.frames[frameIndex].Roll_1 + frames.frames[frameIndex].Roll_2;
+                    }
+
+                }
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
